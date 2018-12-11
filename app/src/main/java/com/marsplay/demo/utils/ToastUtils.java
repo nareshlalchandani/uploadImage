@@ -7,8 +7,9 @@ import android.widget.Toast;
 import com.marsplay.demo.application.AppController;
 
 /**
- * Created by naresh chandani on 09/09/2017
+ * Created by naresh on 10/12/18.
  */
+
 public class ToastUtils {
 
     public static void shortToast(@StringRes int text) {

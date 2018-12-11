@@ -1,6 +1,12 @@
 package com.marsplay.demo.net;
 
+/**
+ * Created by naresh on 10/12/18.
+ */
+
+
 public interface ServiceCallBacks {
+
 
     int UPLOAD_IMAGE = 1;
     int IMAGES = 2;

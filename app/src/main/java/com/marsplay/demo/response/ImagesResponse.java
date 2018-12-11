@@ -6,7 +6,7 @@ import com.marsplay.demo.response.model.ImagesResponseModel;
 import java.util.List;
 
 /**
- * Created by naresh on 4/4/17.
+ * Created by naresh on 10/12/18.
  */
 
 public class ImagesResponse extends BaseResponse {

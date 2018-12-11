@@ -4,6 +4,10 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
+/**
+ * Created by naresh on 10/12/18.
+ */
+
 public interface ActionBarBridge {
 
     void initActionBar();

@@ -7,10 +7,14 @@ import com.marsplay.demo.R;
 
 import java.io.File;
 
+/**
+ * Created by naresh on 10/12/18.
+ */
+
 public class ServiceManager {
 
-    //Development
-    private static String BASE_URL = "https://bsapp-new-api.app6.in/Api/";
+    //Development URL
+    private static String BASE_URL = "http://nareshchandani-001-site10.itempurl.com";
 
     private Context mContext;
     private ServiceCallBacks mServiceCallBacks;
@@ -48,7 +52,7 @@ public class ServiceManager {
         VolleyTask submitTask = new VolleyTask(mContext, mServiceCallBacks, ServiceCallBacks.IMAGES);
         submitTask.setShowProgress(false);
 
-        String serviceUrl = BASE_URL + "Hazard/Get_Category_List";
+        String serviceUrl = BASE_URL + "/API/Hazard/Get_Category_List";
 
         submitTask.getData(serviceUrl);
     }

@@ -42,6 +42,9 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
         previewImage();//2
     }
 
+    /**
+     * Bind view
+     */
     private void bindViews() {
 
         setUpActionBarWithUpButton();
@@ -60,7 +63,7 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
     }
 
     /**
-     * Displaying captured image/video on the screen
+     * Display captured image in view
      */
     private void previewImage() {
 
@@ -77,6 +80,9 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
         }
     }
 
+    /**
+     * Upload image API
+     */
     public void callUploadImageAPI() {
 
         File file = new File(imagePath);

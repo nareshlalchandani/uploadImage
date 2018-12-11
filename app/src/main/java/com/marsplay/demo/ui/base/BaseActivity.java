@@ -18,7 +18,7 @@ import com.marsplay.demo.utils.bridges.PreferenceBridge;
 import com.marsplay.demo.prefrences.PreferenceManager;
 
 /**
- * Created by naresh chandani on 09/09/2017
+ * Created by naresh on 10/12/18.
  */
 
 public class BaseActivity extends AppCompatActivity implements ActionBarBridge, PreferenceBridge {

@@ -6,10 +6,9 @@ import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.marsplay.demo.R;
 
 /**
- * Created by ubuntu2 on 05/04/2017.
+ * Created by naresh on 10/12/18.
  */
 
 public class AppController extends Application {

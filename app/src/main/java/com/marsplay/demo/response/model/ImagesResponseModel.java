@@ -2,6 +2,9 @@ package com.marsplay.demo.response.model;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Created by naresh on 10/12/18.
+ */
 public class ImagesResponseModel {
 
     @SerializedName("id")

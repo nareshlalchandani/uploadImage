@@ -34,17 +34,18 @@ public class MainActivity extends BaseActivity {
     Button btnCapturePicture;
     Button btnImagesList;
 
-    private File imageFile;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
+        bindViews();
     }
 
-    private void init() {
+    /**
+     * Bind view
+     */
+    private void bindViews() {
 
         btnCapturePicture = findViewById(R.id.btn_capture_picture);
         btnImagesList = findViewById(R.id.btn_images_list);
@@ -98,7 +99,7 @@ public class MainActivity extends BaseActivity {
 
                 Uri resultUri = result.getUri();
 
-                imageFile = new File(resultUri.getPath());
+                File imageFile = new File(resultUri.getPath());
 
                 launchUploadActivity(imageFile);
 
@@ -108,7 +109,6 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
-
 
     private void startCropActivity(File file) {
 

@@ -34,7 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Created by naresh on 9/9/17.
+ * Created by naresh on 10/12/18.
  */
 
 public class VolleyTask {
@@ -45,7 +45,7 @@ public class VolleyTask {
     private ProgressDialog mProgressDialog;
     private String TAG = VolleyTask.class.getSimpleName();
 
-    public VolleyTask(Context mContext, ServiceCallBacks mCallBacks, int mCallerType) {
+    VolleyTask(Context mContext, ServiceCallBacks mCallBacks, int mCallerType) {
         super();
         this.mContext = mContext;
         this.mCallBacks = mCallBacks;
@@ -55,7 +55,7 @@ public class VolleyTask {
     /**
      * @param isShowProgress the isShowProgress to set
      */
-    public void setShowProgress(boolean isShowProgress) {
+    void setShowProgress(boolean isShowProgress) {
 
         if (isShowProgress && mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(mContext);
@@ -85,117 +85,6 @@ public class VolleyTask {
                 mProgressDialog.cancel();
             }
         }
-    }
-
-    /**
-     * Call a service with post parameters (Json object) without time out
-     *
-     * @param url        ,Url which has to call
-     * @param jsonObject ,body
-     */
-    public void postDataWithoutTimeOut(String url, JSONObject jsonObject) {
-
-        showProgressDialog();
-
-        LogUtility.printDebugMsg(TAG, "Request url" + url);
-        LogUtility.printDebugMsg(TAG, "Request body" + jsonObject.toString());
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        LogUtility.printErrorMsg(TAG, "Response data : " + response);
-
-                        mCallBacks.onRequestComplete(response.toString(), mCallerType);
-
-                        cancelProgressDialog();
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                printVolleyError(error);
-
-                mCallBacks.onError(error.getMessage(), mCallerType);
-
-                cancelProgressDialog();
-            }
-        }) {
-            //add the extra header here
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json; charset=utf-8");
-                return params;
-            }
-        };
-
-        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, AppConstant.APP_NAME);
-    }
-
-    /**
-     * Call a service with post parameters (Json object)
-     *
-     * @param url        Url which has to call
-     * @param jsonObject body
-     */
-    public void postData(String url, JSONObject jsonObject) {
-
-        showProgressDialog();
-
-        LogUtility.printDebugMsg(TAG, "Request url : " + url);
-        LogUtility.printDebugMsg(TAG, "Request body : " + jsonObject.toString());
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        LogUtility.printDebugMsg(TAG, "Response data : " + response);
-
-                        mCallBacks.onRequestComplete(response.toString(), mCallerType);
-
-                        cancelProgressDialog();
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                printVolleyError(error);
-
-                mCallBacks.onError(error.getMessage(), mCallerType);
-
-                cancelProgressDialog();
-            }
-        }) {
-            //add the extra header here
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-
-                Map<String, String> params = new HashMap<>();
-
-                params.put("Content-Type", "application/json; charset=utf-8");
-                return params;
-            }
-        };
-
-        jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(
-                10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        // jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, AppConstant.APP_NAME);
     }
 
     /**
@@ -250,7 +139,7 @@ public class VolleyTask {
     /**
      * Call a service without body parameter
      */
-    public void getData(String url) {
+    void getData(String url) {
 
         showProgressDialog();
 
@@ -293,52 +182,7 @@ public class VolleyTask {
         AppController.getInstance().addToRequestQueue(jsonObjReq, AppConstant.APP_NAME);
     }
 
-    public void postMultipartWithoutFile(String url, final String stringData) {
-
-        showProgressDialog();
-
-        LogUtility.printDebugMsg(TAG, "Request Url : " + url);
-        LogUtility.printDebugMsg(TAG, "Request Body : " + stringData);
-
-        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
-            @Override
-            public void onResponse(NetworkResponse response) {
-                String resultResponse = new String(response.data);
-
-                LogUtility.printDebugMsg(TAG, "Response Data : " + resultResponse);
-
-                mCallBacks.onRequestComplete(resultResponse, mCallerType);
-                cancelProgressDialog();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                printVolleyError(error);
-
-                mCallBacks.onError(error.getMessage(), mCallerType);
-
-                cancelProgressDialog();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-
-                params.put("data", stringData);
-                //params.put("location", "Indonesia");
-                //params.put("about", "UI/UX Designer");
-                //params.put("contact", "angga@email.com");
-                return params;
-            }
-        };
-
-        multipartRequest.setRetryPolicy(new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        AppController.getInstance().addToRequestQueue(multipartRequest);
-    }
-
-    public void postMultipartImage(String url, final File file, final String stringData) {
+    void postMultipartImage(String url, final File file, final String stringData) {
 
         showProgressDialog();
 
@@ -393,26 +237,6 @@ public class VolleyTask {
         AppController.getInstance().addToRequestQueue(multipartRequest);
     }
 
-
-    private byte[] getFileDataFromImagePath(String filepath) {
-
-        File imageFile = new File(filepath);
-
-        FileInputStream fis = null;
-
-        try {
-            fis = new FileInputStream(imageFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-
-        return bos.toByteArray();
-    }
-
     private byte[] getCompressedByteFromFile(File imageFile) {
 
         int DESIRED_HEIGHT = 1024;
@@ -451,22 +275,6 @@ public class VolleyTask {
             originalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             return bos.toByteArray();
         }
-    }
-
-    private byte[] getOriginalByteFromFile(File imageFile) {
-
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(imageFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Bitmap bm = BitmapFactory.decodeStream(fis);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-
-        return baos.toByteArray();
     }
 
     private void printVolleyError(VolleyError error) {
