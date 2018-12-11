@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.marsplay.demo">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,7 +10,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <!--Gallery permission-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.AppController"
@@ -23,7 +22,6 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:allowBackup,icon,theme,label"
         android:theme="@style/AppTheme">
 
         <activity

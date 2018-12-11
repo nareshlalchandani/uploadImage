@@ -64,14 +64,17 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
      */
     private void previewImage() {
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
+        File imgFile = new File(imagePath);
 
-        // down sizing image as it throws OutOfMemory Exception for larger
-        options.inSampleSize = 8;
+        if (imgFile.exists()) {
 
-        final Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
-        imgPreview.setImageBitmap(bitmap);
+            imgPreview.setImageBitmap(myBitmap);
+
+        } else {
+            imgPreview.setImageResource(R.drawable.default_image);
+        }
     }
 
     public void callUploadImageAPI() {

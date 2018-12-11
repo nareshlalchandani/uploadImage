@@ -1,15 +1,12 @@
 <resources>
-    <string name="app_name">MarsPlay Demo</string>
+    <string name="app_name">Upload Image Demo</string>
 
     <string name="txt_upload_image">Upload Image</string>
     <string name="txt_image_list">Image List</string>
 
-    <string name="btn_txt_take_image">Take Image</string>
-    <string name="btn_txt_choose_image">Choose Image</string>
     <string name="btn_txt_upload_image">Upload Image</string>
 
     <!--Some Messages-->
-    <string name="dlg_fail_connection">Sorry, connection lost. It will be reestablished when the Internet will be available.</string>
     <string name="internet_not_available">Internet is not available, Please check you internet connection and try again</string>
 
     <string name="permission_read_storage">Gallery access is require to select picture</string>

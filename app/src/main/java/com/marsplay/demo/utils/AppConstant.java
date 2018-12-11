@@ -6,5 +6,5 @@ package com.marsplay.demo.utils;
 
 public class AppConstant {
 
-    public static final String APP_NAME = "MarsPlay Demo";
+    public static final String APP_NAME = "Upload Image Demo";
 }

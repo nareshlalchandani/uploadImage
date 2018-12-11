@@ -35,10 +35,10 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
         setUpActionBarWithUpButton();
         setActionBarTitle("Uploaded Images");
 
-        txtErrorMessage = (TextView) findViewById(R.id.txt_error_message);
+        txtErrorMessage = findViewById(R.id.txt_error_message);
         txtErrorMessage.setVisibility(View.GONE);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
         adapter = new ImagesAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
