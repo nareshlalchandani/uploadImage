@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -33,6 +34,10 @@ public class MainActivity extends BaseActivity {
 
     Button btnCapturePicture;
     Button btnImagesList;
+
+    private Boolean doubleBackToExitPressedOnce = false;
+    private static final int BACK_INTERVAL = 2500;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,28 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (doubleBackToExitPressedOnce) {
+            //finish the main activity and close the app
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        ToastUtils.shortToast("Please click back again to exit");
+
+        //Handle delay after first and second time button click
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, BACK_INTERVAL);
     }
 
     @Override

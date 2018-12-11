@@ -14,11 +14,12 @@ import java.io.File;
 public class ServiceManager {
 
     //Development URL
-    private static String BASE_URL = "http://nareshchandani-001-site10.itempurl.com";
+    public static String BASE_URL = "http://nareshchandani-001-site10.itempurl.com";
 
     private Context mContext;
     private ServiceCallBacks mServiceCallBacks;
 
+    //http://localhost:65489
     public ServiceManager(Context mContext, ServiceCallBacks callBacks) {
         super();
         this.mContext = mContext;
@@ -37,7 +38,7 @@ public class ServiceManager {
 
         String reqBodyString = new Gson().toJson(model);
 
-        String urlString = BASE_URL + "/API/Hazard/Hazard_Process_Submit/";
+        String urlString = BASE_URL + "/API/IMAGE/Image_Post";
 
         submitTask.postMultipartImage(urlString, file, reqBodyString);
     }
@@ -52,7 +53,7 @@ public class ServiceManager {
         VolleyTask submitTask = new VolleyTask(mContext, mServiceCallBacks, ServiceCallBacks.IMAGES);
         submitTask.setShowProgress(false);
 
-        String serviceUrl = BASE_URL + "/API/Hazard/Get_Category_List";
+        String serviceUrl = BASE_URL + "/API/IMAGE/Image_List";
 
         submitTask.getData(serviceUrl);
     }

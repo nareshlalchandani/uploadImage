@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.webkit.URLUtil;
 import android.widget.ImageView;
 
 import com.marsplay.demo.R;
+import com.marsplay.demo.net.ServiceManager;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -30,12 +32,14 @@ public class Utility {
         context.startActivity(intent);
     }
 
-    public static void loadBannerImage(String imageUrl, ImageView imageView) {
+    public static void loadImage(String imageUrl, ImageView imageView) {
 
-        if (URLUtil.isValidUrl(imageUrl)) {
+        if (imageUrl == null || TextUtils.isEmpty(imageUrl)) {
+
+            String path = ServiceManager.BASE_URL + imageUrl;
 
             Picasso.get()
-                    .load(imageUrl)
+                    .load(path)
                     .placeholder(R.drawable.default_image)
                     .error(R.drawable.default_image)
                     .into(imageView);

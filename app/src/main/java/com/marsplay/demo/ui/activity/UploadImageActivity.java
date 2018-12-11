@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.google.gson.Gson;
 import com.marsplay.demo.R;
+import com.marsplay.demo.model.UserModel;
 import com.marsplay.demo.net.ServiceCallBacks;
 import com.marsplay.demo.net.ServiceManager;
 import com.marsplay.demo.response.BaseResponse;
@@ -87,8 +88,11 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
 
         File file = new File(imagePath);
 
+        UserModel model=new UserModel();
+        model.setName("Dummy User");
+
         ServiceManager manager = new ServiceManager(this, this);
-        manager.uploadImage(file, new Object());
+        manager.uploadImage(file, model);
     }
 
     @Override

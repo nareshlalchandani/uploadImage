@@ -7,36 +7,36 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ImagesResponseModel {
 
-    @SerializedName("id")
-    private String id;
+    @SerializedName("ID")
+    private String ID;
 
-    @SerializedName("imageUrl")
-    private String imageUrl;
+    @SerializedName("Image_Url")
+    private String Image_Url;
 
-    @SerializedName("createDate")
-    private String createDate;
+    @SerializedName("Name")
+    private String Name;
 
-    public String getId() {
-        return id;
+    public String getID() {
+        return ID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage_Url() {
+        return Image_Url;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage_Url(String image_Url) {
+        Image_Url = image_Url;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getName() {
+        return Name;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setName(String name) {
+        Name = name;
     }
 }

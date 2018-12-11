@@ -88,55 +88,6 @@ public class VolleyTask {
     }
 
     /**
-     * Call a service without post parameters
-     */
-    public void postData(String url) {
-
-        showProgressDialog();
-
-        LogUtility.printDebugMsg(TAG, "Request url" + url);
-
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                url, null,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        LogUtility.printDebugMsg(TAG, "Response data : " + response);
-
-                        mCallBacks.onRequestComplete(response.toString(), mCallerType);
-
-                        cancelProgressDialog();
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                printVolleyError(error);
-
-                mCallBacks.onError(error.getMessage(), mCallerType);
-
-                cancelProgressDialog();
-
-            }
-        }) {
-
-            //add the extra header here
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Content-Type", "application/json");
-                return params;
-            }
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(jsonObjReq, AppConstant.APP_NAME);
-    }
-
-    /**
      * Call a service without body parameter
      */
     void getData(String url) {
@@ -220,8 +171,6 @@ public class VolleyTask {
             @Override
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
-                // file name could found file base or direct access from real path
-                // for now just get bitmap data from ImageView
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss", Locale.US);
                 String strImageName = dateFormat.format(new Date());

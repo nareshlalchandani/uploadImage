@@ -46,7 +46,7 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
             public void onItemClick(View view, int position) {
 
                 Intent intent = new Intent(ImagesListActivity.this, ZoomImageActivity.class);
-                intent.putExtra(ZoomImageActivity.FIELD_IMAGE_URL, adapter.getObject(position).getImageUrl());
+                intent.putExtra(ZoomImageActivity.FIELD_IMAGE_URL, adapter.getObject(position).getImage_Url());
                 startActivity(intent);
             }
         }));
