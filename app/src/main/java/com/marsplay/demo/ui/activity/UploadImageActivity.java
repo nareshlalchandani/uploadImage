@@ -88,7 +88,7 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
 
         File file = new File(imagePath);
 
-        UserModel model=new UserModel();
+        UserModel model = new UserModel();
         model.setName("Dummy User");
 
         ServiceManager manager = new ServiceManager(this, this);
@@ -98,7 +98,7 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
     @Override
     public void onRequestComplete(Object data, int caller) {
 
-        if (caller == ServiceCallBacks.IMAGES) {
+        if (caller == ServiceCallBacks.UPLOAD_IMAGE) {
 
             BaseResponse response = new Gson().fromJson((String) data, BaseResponse.class);
 
@@ -122,5 +122,4 @@ public class UploadImageActivity extends BaseActivity implements ServiceCallBack
     public void onRequestCancel(String errorString, int caller) {
         ToastUtils.shortToast(errorString);
     }
-
 }

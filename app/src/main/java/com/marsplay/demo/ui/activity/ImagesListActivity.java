@@ -2,6 +2,7 @@ package com.marsplay.demo.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -12,13 +13,18 @@ import com.marsplay.demo.adapter.ImagesAdapter;
 import com.marsplay.demo.net.ServiceCallBacks;
 import com.marsplay.demo.net.ServiceManager;
 import com.marsplay.demo.response.ImagesResponse;
+import com.marsplay.demo.response.model.ImagesResponseModel;
 import com.marsplay.demo.ui.base.BaseActivity;
 import com.marsplay.demo.utils.RecyclerItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImagesListActivity extends BaseActivity implements ServiceCallBacks {
 
     private TextView txtErrorMessage;
     private ImagesAdapter adapter;
+    private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +56,19 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
                 startActivity(intent);
             }
         }));
+
+        refreshLayout = findViewById(R.id.swipe_view);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callAPI();
+            }
+        });
     }
 
     private void callAPI() {
+
+        refreshLayout.setRefreshing(true);
 
         ServiceManager manager = new ServiceManager(this, this);
         manager.getImagesAPI();
@@ -63,6 +79,8 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
 
         if (caller == ServiceCallBacks.IMAGES) {
 
+            refreshLayout.setRefreshing(false);
+
             ImagesResponse response = new Gson().fromJson((String) data, ImagesResponse.class);
 
             if (response.getResponse().isSuccess()) {
@@ -72,6 +90,7 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
 
             } else {
                 adapter.clear();
+                adapter.notifyDataSetChanged();
             }
 
             updateUI(response.getResponse().getMessage());
@@ -80,11 +99,15 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
 
     @Override
     public void onError(String errorString, int caller) {
+
+        refreshLayout.setRefreshing(false);
         updateUI(errorString);
     }
 
     @Override
     public void onRequestCancel(String errorString, int caller) {
+
+        refreshLayout.setRefreshing(false);
         updateUI(errorString);
     }
 

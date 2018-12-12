@@ -4,11 +4,12 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.URLUtil;
 
 import com.marsplay.demo.R;
+import com.marsplay.demo.net.ServiceManager;
 import com.marsplay.demo.ui.base.BaseActivity;
 import com.marsplay.demo.utils.LogUtility;
 import com.marsplay.demo.utils.ToastUtils;
@@ -37,13 +38,17 @@ public class ZoomImageActivity extends BaseActivity {
         setContentView(R.layout.activity_zoom_image);
 
         loadImage();
+
+        setUpActionBarWithUpButton();
+        setActionBarTitle("Image Zooming");
+
     }
 
     @Override
     public void onContentChanged() {
         super.onContentChanged();
 
-        imgFeed = findViewById(R.id.imgFeed);
+        imgFeed = findViewById(R.id.img_zooming);
 
         if (imgFeed == null) {
             return;
@@ -52,6 +57,7 @@ public class ZoomImageActivity extends BaseActivity {
         // set the default image display type
         imgFeed.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
         //imgFeed.setScrollEnabled(true);
+
 
         imgFeed.setSingleTapListener(
                 new ImageViewTouch.OnImageViewTouchSingleTapListener() {
@@ -103,18 +109,18 @@ public class ZoomImageActivity extends BaseActivity {
  */
     private void loadImage() {
 
-        setUpActionBarWithUpButton();
-        setActionBarTitle(R.string.app_name);
+        imgFeed = findViewById(R.id.img_zooming);
 
-        imgFeed = findViewById(R.id.imgFeed);
+        String imageUrl = getIntent().getStringExtra(FIELD_IMAGE_URL);
+        //LogUtility.printDebugMsg(TAG, "Url : " + imageUrl);
 
-        String url = getIntent().getStringExtra(FIELD_IMAGE_URL);
-        LogUtility.printDebugMsg(TAG, "Url : " + url);
+        if (imageUrl != null && !TextUtils.isEmpty(imageUrl)) {
 
-        if (url != null && URLUtil.isValidUrl(url)) {
+            String path = ServiceManager.BASE_URL + imageUrl;
+            //LogUtility.printDebugMsg(TAG, "path : " + path);
 
             Picasso.get()
-                    .load(url)
+                    .load(path)
                     .into(imgFeed);
 
             imgFeed.setVisibility(View.VISIBLE);

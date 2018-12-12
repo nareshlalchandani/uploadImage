@@ -44,7 +44,8 @@ public class ImagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         ViewHolder holder = (ViewHolder) _holder;
 
-        Utility.loadImage(model.getImage_Url(), holder.imgFile);
+        //Utility.loadImage(model.getImage_Url(), holder.imgFile);
+        Utility.loadImageWithoutBase(model.getImage_Url(), holder.imgFile);
     }
 
     @Override

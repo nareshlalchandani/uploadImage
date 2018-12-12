@@ -32,11 +32,12 @@ public class Utility {
         context.startActivity(intent);
     }
 
-    public static void loadImage(String imageUrl, ImageView imageView) {
+    public static void loadImageWithoutBase(String imageUrl, ImageView imageView) {
 
-        if (imageUrl == null || TextUtils.isEmpty(imageUrl)) {
+        if (imageUrl != null && !TextUtils.isEmpty(imageUrl)) {
 
             String path = ServiceManager.BASE_URL + imageUrl;
+            //LogUtility.printDebugMsg( "path : " + path);
 
             Picasso.get()
                     .load(path)
@@ -49,5 +50,14 @@ public class Utility {
                 imageView.setImageResource(R.drawable.default_image);
             }
         }
+    }
+
+    public static void loadImage(String imageUrl, ImageView imageView) {
+
+        Picasso.get()
+                .load(imageUrl)
+                .placeholder(R.drawable.default_image)
+                .error(R.drawable.default_image)
+                .into(imageView);
     }
 }
