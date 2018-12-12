@@ -13,12 +13,8 @@ import com.marsplay.demo.adapter.ImagesAdapter;
 import com.marsplay.demo.net.ServiceCallBacks;
 import com.marsplay.demo.net.ServiceManager;
 import com.marsplay.demo.response.ImagesResponse;
-import com.marsplay.demo.response.model.ImagesResponseModel;
 import com.marsplay.demo.ui.base.BaseActivity;
 import com.marsplay.demo.utils.RecyclerItemClickListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ImagesListActivity extends BaseActivity implements ServiceCallBacks {
 
@@ -36,6 +32,9 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
         callAPI();
     }
 
+    /**
+     * Bind view
+     */
     private void init() {
 
         setUpActionBarWithUpButton();
@@ -51,6 +50,7 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
             @Override
             public void onItemClick(View view, int position) {
 
+                //Call zoom image activity
                 Intent intent = new Intent(ImagesListActivity.this, ZoomImageActivity.class);
                 intent.putExtra(ZoomImageActivity.FIELD_IMAGE_URL, adapter.getObject(position).getImage_Url());
                 startActivity(intent);
@@ -68,6 +68,7 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
 
     private void callAPI() {
 
+        //Show refresh view
         refreshLayout.setRefreshing(true);
 
         ServiceManager manager = new ServiceManager(this, this);
@@ -93,7 +94,7 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
                 adapter.notifyDataSetChanged();
             }
 
-            updateUI(response.getResponse().getMessage());
+            updateUI("No Images Found");
         }
     }
 
@@ -111,6 +112,7 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
         updateUI(errorString);
     }
 
+    /*Update error message based on list items*/
     private void updateUI(String message) {
 
         if (adapter.isEmpty()) {

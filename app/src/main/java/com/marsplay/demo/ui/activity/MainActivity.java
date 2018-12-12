@@ -118,6 +118,7 @@ public class MainActivity extends BaseActivity {
                     super.onCanceled(source, type);
                 }
             });
+
         } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -137,6 +138,10 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    /**
+     * Launch crop image view
+     */
     private void startCropActivity(File file) {
 
         CropImage.activity(Uri.fromFile(file))
@@ -170,6 +175,11 @@ public class MainActivity extends BaseActivity {
         builder.show();
     }
 
+    /**
+     * Take image from camera
+     * 1.Check runtime permission
+     * 2.Launch camera view
+     */
     private void takePicture() {
 
         if (!RuntimePermissions.isPermissionGranted(this, RuntimePermissions.CAMERA_PERMISSION_ID)) {
@@ -182,9 +192,15 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
+        //Open camera action
         EasyImage.openCamera(this, REQUEST_OPEN_CAMERA);
     }
 
+    /**
+     * Choose image from gallery
+     * 1.Check runtime permission
+     * 2.Launch camera view
+     */
     private void chooseImage() {
 
         if (!RuntimePermissions.isPermissionGranted(this, RuntimePermissions.READ_EXTERNAL_STORAGE_PERMISSION_ID)) {
@@ -192,6 +208,7 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
+        //Open gallery action
         EasyImage.openGallery(this, REQUEST_OPEN_GALLERY);
     }
 
@@ -204,7 +221,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
-        //Camera
+        //Camera permission callback
         if (requestCode == REQUEST_OPEN_CAMERA) {
 
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -237,7 +254,7 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-        //Gallery
+        //Gallery permission callback
         if (requestCode == REQUEST_OPEN_GALLERY) {
 
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
