@@ -46,6 +46,8 @@ public class ImagesListActivity extends BaseActivity implements ServiceCallBacks
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         adapter = new ImagesAdapter(this);
         recyclerView.setAdapter(adapter);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

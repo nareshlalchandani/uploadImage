@@ -43,6 +43,7 @@ public class Utility {
                     .load(path)
                     .placeholder(R.drawable.default_image)
                     .error(R.drawable.default_image)
+                    .resize(720, 500)
                     .into(imageView);
         } else {
 

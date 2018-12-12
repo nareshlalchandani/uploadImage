@@ -55,9 +55,8 @@ public class ZoomImageActivity extends BaseActivity {
         }
 
         // set the default image display type
-        imgFeed.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
+        //imgFeed.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
         //imgFeed.setScrollEnabled(true);
-
 
         imgFeed.setSingleTapListener(
                 new ImageViewTouch.OnImageViewTouchSingleTapListener() {
